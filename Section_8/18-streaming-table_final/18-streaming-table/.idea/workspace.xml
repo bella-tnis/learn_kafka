@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4638ad2e-3f61-4ba5-90be-027c02fa9bca" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../Section_3/01-storage-demo/.idea/01-storage-demo.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../18-streaming-table-starter/18-streaming-table/18-streaming-table.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../18-streaming-table-starter/18-streaming-table/src/main/java/guru/learningjournal/kafka/examples/StreamingTableApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Section_3/01-storage-demo/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Section_3/01-storage-demo/.idea/misc.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1ReO5GNIkhQQq17bcB1Qp5NANhC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.notifications" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Udemy\StarterProject\18-streaming-table" />
+      <recent name="C:\Udemy\StarterProject\18-streaming-table\src\main\java" />
+      <recent name="C:\Udemy\StarterProject\18-streaming-table\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.StreamingTableApp">
+    <configuration name="StreamingTableApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="guru.learningjournal.kafka.examples.StreamingTableApp" />
+      <module name="18-streaming-table" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="guru.learningjournal.kafka.examples.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="create-topic" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="streaming-table" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Udemy\StarterProject\18-streaming-table-starter\18-streaming-table\scripts" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="create-topic.cmd" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="start-kafka-server-1" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="streaming-table" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Udemy\StarterProject\18-streaming-table-starter\18-streaming-table\scripts" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="start-kafka-server-1.cmd" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="start-kafka-server-2" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="streaming-table" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Udemy\StarterProject\18-streaming-table-starter\18-streaming-table\scripts" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="start-kafka-server-2.cmd" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="start-producer" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="streaming-table" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Udemy\StarterProject\18-streaming-table-starter\18-streaming-table\scripts" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="start-producer.cmd" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.StreamingTableApp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4638ad2e-3f61-4ba5-90be-027c02fa9bca" name="Default Changelist" comment="" />
+      <created>1570023909221</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570023909221</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="476" y="130" width="1024" height="845" key="#Project_Structure" timestamp="1599292391600">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="476" y="130" width="1024" height="845" key="#Project_Structure/67.27.1853.1053@67.27.1853.1053" timestamp="1599292391600" />
+    <state x="625" y="166" width="726" height="773" key="#StreamingTableApp" timestamp="1599292793388">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="625" y="166" width="726" height="773" key="#StreamingTableApp/67.27.1853.1053@67.27.1853.1053" timestamp="1599292793388" />
+    <state x="729" y="390" width="518" height="325" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1599292551575">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="729" y="390" width="518" height="325" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1599292551575" />
+    <state x="777" y="367" width="424" height="484" key="FileChooserDialogImpl" timestamp="1599292739342">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="777" y="367" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1599292739342" />
+    <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1599292878260">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1599292878260" />
+    <state width="1807" height="278" key="GridCell.Tab.0.center" timestamp="1599292878256">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1599292878256" />
+    <state width="1807" height="278" key="GridCell.Tab.0.left" timestamp="1599292878256">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1599292878255" />
+    <state width="1807" height="278" key="GridCell.Tab.0.right" timestamp="1599292878258">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1599292878258" />
+    <state x="482" y="187" width="1024" height="845" key="SettingsEditor" timestamp="1599292744347">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="482" y="187" width="1024" height="845" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1599292744347" />
+  </component>
+</project>
