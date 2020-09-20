@@ -9,6 +9,9 @@ import org.apache.kafka.streams.kstream.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.Properties;
 
 
@@ -25,8 +28,23 @@ public class CountingWindowApp {
         StreamsBuilder streamsBuilder = new StreamsBuilder();
         KStream<String, SimpleInvoice> KS0 = streamsBuilder.stream(AppConfigs.posTopicName,
             Consumed.with(AppSerdes.String(), AppSerdes.SimpleInvoice())
+                .withTimestampExtractor(new InvoiceTimeExtractor())
         );
 
+        // group by key (store id) and windowed the data for 5 minutes
+        KTable<Windowed<String>, Long> KT0 = KS0.groupByKey(Grouped.with(AppSerdes.String(), AppSerdes.SimpleInvoice()))
+                .windowedBy(TimeWindows.of(Duration.ofMinutes(5)))
+                .count();
+
+        // log
+        KT0.toStream().foreach(
+                (wKey, value) -> logger.info(
+                        "StoreID: " + wKey.key() + ", WindowID: " + wKey.window().hashCode() +
+                                "Window start: " + Instant.ofEpochMilli(wKey.window().start()).atOffset(ZoneOffset.UTC) +
+                                "Window end: " + Instant.ofEpochMilli(wKey.window().end()).atOffset(ZoneOffset.UTC) +
+                                "Count :" + value
+                )
+        );
 
         KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
         streams.start();
