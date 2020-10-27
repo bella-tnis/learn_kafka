@@ -89,6 +89,11 @@ Isr: 0
 #
 ```
 
+**Delete topic in Kafka**
+```
+# /usr/local/kafka/bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic <topic-name>
+```
+
 **Produce message to kafka topic**
 ```
 # /usr/local/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
