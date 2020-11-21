@@ -27,16 +27,17 @@ public class KStreamJoinDemo {
         props.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 0);
 
         StreamsBuilder streamsBuilder = new StreamsBuilder();
+        // stream for topic payment request
         KStream<String, PaymentRequest> KS0 = streamsBuilder.stream(AppConfigs.paymentRequestTopicName,
             Consumed.with(AppSerdes.String(), AppSerdes.PaymentRequest())
                 .withTimestampExtractor(AppTimestampExtractor.PaymentRequest())
         );
-
+        // stream for topic payment confirmation
         KStream<String, PaymentConfirmation> KS1 = streamsBuilder.stream(AppConfigs.paymentConfirmationTopicName,
             Consumed.with(AppSerdes.String(), AppSerdes.PaymentConfirmation())
                 .withTimestampExtractor(AppTimestampExtractor.PaymentConfirmation())
         );
-
+        // join betweeen payment request (KS0) and payment confirmation (KS1)
         KS0.join(
                 KS1,
                 (v1, v2) -> new TransactionStatus()
@@ -46,8 +47,6 @@ public class KStreamJoinDemo {
                 Joined.with(AppSerdes.String(), AppSerdes.PaymentRequest(), AppSerdes.PaymentConfirmation())
         ).print(Printed.toSysOut());
 
-
-
         logger.info("Starting Stream...");
         KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
         streams.start();
@@ -56,6 +55,5 @@ public class KStreamJoinDemo {
             logger.info("Stopping Streams...");
             streams.close();
         }));
-
     }
 }
