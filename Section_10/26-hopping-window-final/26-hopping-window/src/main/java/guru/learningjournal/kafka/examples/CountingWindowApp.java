@@ -25,12 +25,14 @@ public class CountingWindowApp {
         props.put(StreamsConfig.STATE_DIR_CONFIG, AppConfigs.stateStoreName);
         //props.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 0);
 
+        // stream builder
         StreamsBuilder streamsBuilder = new StreamsBuilder();
         KStream<String, SimpleInvoice> KS0 = streamsBuilder.stream(AppConfigs.posTopicName,
             Consumed.with(AppSerdes.String(), AppSerdes.SimpleInvoice())
                 .withTimestampExtractor(new InvoiceTimeExtractor())
         );
 
+        // make a ktable with window of duration 5 minutes and with hop interval 1 minutes
         KTable<Windowed<String>, Long> KT0 = KS0.groupByKey(Grouped.with(AppSerdes.String(), AppSerdes.SimpleInvoice()))
             .windowedBy(TimeWindows.of(Duration.ofMinutes(5)).advanceBy(Duration.ofMinutes(1)))
             .count();
