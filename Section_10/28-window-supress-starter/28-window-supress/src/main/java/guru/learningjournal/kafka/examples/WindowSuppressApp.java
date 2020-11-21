@@ -6,10 +6,16 @@ import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.*;
+import org.apache.kafka.streams.kstream.internals.KTableAggregate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Time;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.Properties;
+import java.util.function.Supplier;
 
 
 public class WindowSuppressApp {
@@ -28,7 +34,21 @@ public class WindowSuppressApp {
                 .withTimestampExtractor(new AppTimestampExtractor())
         );
 
+        // group by key and count the hearbeats in window duration of 60 seconds
+        // and accept latecomer in duration of 10 seconds
+        KTable<Windowed<String>, Long> KT01 = KS0.groupByKey(Grouped.with(AppSerdes.String(), AppSerdes.HeartBeat()))
+            .windowedBy(TimeWindows.of(Duration.ofSeconds(60)).grace(Duration.ofSeconds(10)))
+            .count()
+            .suppress(Suppressed.untilWindowCloses(Suppressed.BufferConfig.unbounded()));
 
+        KT01.toStream().foreach(
+                (wKey, value) -> logger.info(
+                        "App ID: " + wKey.key() + " Window ID: " + wKey.window().hashCode() +
+                                " Window start: " + Instant.ofEpochMilli(wKey.window().start()).atOffset(ZoneOffset.UTC) +
+                                " Window end: " + Instant.ofEpochMilli(wKey.window().end()).atOffset(ZoneOffset.UTC) +
+                                " Count: " + value + " " + (value > 2 ? "Application is Alive." : "Application Failed. Sending alert email...")
+                )
+        );
 
         logger.info("Starting Stream...");
         KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
