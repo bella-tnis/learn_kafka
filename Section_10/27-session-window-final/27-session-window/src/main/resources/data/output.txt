@@ -1,0 +1,7 @@
+Final Output for Session Window
+-------
+INFO User ID: USR102 Window ID: 2050419625 Window start: 2019-02-05T10:02Z Window end: 2019-02-05T10:02Z Count: 1
+INFO User ID: USR102 Window ID: 2051379881 Window start: 2019-02-05T10:10Z Window end: 2019-02-05T10:10Z Count: 1
+
+INFO User ID: USR101 Window ID: 2050839593 Window start: 2019-02-05T10:01Z Window end: 2019-02-05T10:10Z Count: 4
+INFO User ID: USR101 Window ID: 2052459913 Window start: 2019-02-05T10:19Z Window end: 2019-02-05T10:19Z Count: 1
