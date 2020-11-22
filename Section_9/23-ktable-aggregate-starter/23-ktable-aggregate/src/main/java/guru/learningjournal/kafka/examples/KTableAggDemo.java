@@ -26,44 +26,38 @@ public class KTableAggDemo {
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, AppConfigs.bootstrapServers);
         props.put(StreamsConfig.STATE_DIR_CONFIG, AppConfigs.stateStoreLocation);
         props.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG,100);
-        try {
-            StreamsBuilder streamsBuilder = new StreamsBuilder();
-            streamsBuilder.table(AppConfigs.topicName,
-                Consumed.with(AppSerdes.String(), AppSerdes.Employee()))
-                    .groupBy((k,v)-> KeyValue.pair(v.getDepartment(), v), Grouped.with(AppSerdes.String(), AppSerdes.Employee()))
-                    .aggregate(
-                            //Initializer
-                            ()->new DepartmentAggregate()
-                            .withAvgSalary(0D)
-                            .withTotalSalary(0)
-                            .withEmployeeCount(0),
-                            //Adder
-                            (k,v, aggValue) -> new DepartmentAggregate()
-                                .withEmployeeCount(aggValue.getEmployeeCount() + 1)
-                                .withTotalSalary(aggValue.getTotalSalary() + v.getSalary())
-                                .withAvgSalary((aggValue.getTotalSalary() + v.getSalary())/(aggValue.getEmployeeCount() +1D)),
-                            //Substract
-                            (k,v, aggValue) -> new DepartmentAggregate()
-                                .withEmployeeCount(aggValue.getEmployeeCount() - 1)
-                                .withTotalSalary(aggValue.getTotalSalary() - v.getSalary())
-                                .withAvgSalary((aggValue.getTotalSalary() - v.getSalary())/(aggValue.getEmployeeCount() -1D)),
-                            //Serializer
-                            Materialized.<String, DepartmentAggregate, KeyValueStore<Bytes, byte[]>>as(
-                                    AppConfigs.stateStoreName).withValueSerde(AppSerdes.DepartmentAggregate())
-                            ).toStream().print(Printed.<String, DepartmentAggregate>toSysOut().withLabel("Department Aggregate"));
+        
+        StreamsBuilder streamsBuilder = new StreamsBuilder();
+        streamsBuilder.table(AppConfigs.topicName,
+            Consumed.with(AppSerdes.String(), AppSerdes.Employee()))
+                .groupBy((k,v)-> KeyValue.pair(v.getDepartment(), v), Grouped.with(AppSerdes.String(), AppSerdes.Employee()))
+                .aggregate(
+                        //Initializer
+                        ()->new DepartmentAggregate()
+                        .withAvgSalary(0D)
+                        .withTotalSalary(0)
+                        .withEmployeeCount(0),
+                        //Adder
+                        (k,v, aggValue) -> new DepartmentAggregate()
+                            .withEmployeeCount(aggValue.getEmployeeCount() + 1)
+                            .withTotalSalary(aggValue.getTotalSalary() + v.getSalary())
+                            .withAvgSalary((aggValue.getTotalSalary() + v.getSalary())/(aggValue.getEmployeeCount() +1D)),
+                        //Substract
+                        (k,v, aggValue) -> new DepartmentAggregate()
+                            .withEmployeeCount(aggValue.getEmployeeCount() - 1)
+                            .withTotalSalary(aggValue.getTotalSalary() - v.getSalary())
+                            .withAvgSalary((aggValue.getTotalSalary() - v.getSalary())/(aggValue.getEmployeeCount() -1D)),
+                        //Serializer
+                        Materialized.<String, DepartmentAggregate, KeyValueStore<Bytes, byte[]>>as(
+                                AppConfigs.stateStoreName).withValueSerde(AppSerdes.DepartmentAggregate())
+                        ).toStream().print(Printed.<String, DepartmentAggregate>toSysOut().withLabel("Department Aggregate"));
 
-            KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
-            streams.start();
+        KafkaStreams streams = new KafkaStreams(streamsBuilder.build(), props);
+        streams.start();
 
-                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                    logger.info("Stopping Streams");
-                    streams.close();
-                }));
-
-        }catch (Exception e){
-            System.out.println("Something went wrong");
-        }
-
-
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                logger.info("Stopping Streams");
+                streams.close();
+            }));
     }
 }
