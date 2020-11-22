@@ -15,30 +15,32 @@ public class AppTopology {
     private static final Logger logger = LogManager.getLogger();
 
     static void withBuilder(StreamsBuilder builder) {
+        // consume from topic ad impression
         KStream<String, AdImpression> KS0 = builder.stream(AppConfigs.impressionTopic,
             Consumed.with(AppSerdes.String(), AppSerdes.AdImpression()));
-
+        // group by ad impression with key campaigner
         KTable<String, Long> adImpressionCount = KS0.groupBy((k, v) -> v.getCampaigner(),
             Grouped.with(AppSerdes.String(), AppSerdes.AdImpression()))
             .count();
-
+        // consume from topic ad clicks
         KStream<String, AdClick> KS1 = builder.stream(AppConfigs.clicksTopic,
             Consumed.with(AppSerdes.String(), AppSerdes.AdClick()));
-
+        // group by ad clicks with key campaigner
         KTable<String, Long> adClickCount = KS1.groupBy((k, v) -> v.getCampaigner(),
             Grouped.with(AppSerdes.String(), AppSerdes.AdClick()))
             .count();
-
+        // left join between ad impression and ad click
         KTable<String, CampaignPerformance> campaignPerformance = adImpressionCount.leftJoin(
-            adClickCount, (impCount, clkCount) -> new CampaignPerformance()
-                .withAdImpressions(impCount)
-                .withAdClicks(clkCount))
-            .mapValues((k, v) -> v.withCampaigner(k),
-                Materialized.<String, CampaignPerformance, KeyValueStore<Bytes, byte[]>>
-                    as(AppConfigs.stateStoreNameCP)
-                    .withKeySerde(AppSerdes.String())
-                    .withValueSerde(AppSerdes.CampaignPerformance()));
-
+            adClickCount,
+            (impCount, clkCount) -> new CampaignPerformance()
+                    .withAdImpressions(impCount)
+                    .withAdClicks(clkCount)
+        ).mapValues((k, v) -> v.withCampaigner(k),
+                    Materialized.<String, CampaignPerformance, KeyValueStore<Bytes, byte[]>>
+                            as(AppConfigs.stateStoreNameCP)
+                            .withKeySerde(AppSerdes.String())
+                            .withValueSerde(AppSerdes.CampaignPerformance()));
+        // pass to the output topic
         campaignPerformance.toStream().to(AppConfigs.outputTopic,
             Produced.with(AppSerdes.String(), AppSerdes.CampaignPerformance()));
     }

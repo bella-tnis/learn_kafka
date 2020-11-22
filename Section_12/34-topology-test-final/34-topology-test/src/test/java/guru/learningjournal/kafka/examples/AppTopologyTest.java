@@ -135,7 +135,6 @@ class AppTopologyTest {
 
     }
 
-
     @AfterAll
     static void cleanUpAll() throws IOException {
         try {
